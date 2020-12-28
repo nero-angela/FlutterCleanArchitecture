@@ -1,5 +1,8 @@
 # Flutter Clean Architecture & TDD & Bloc
-Tutorial of Clean Architecture & TDD & Bloc
+- Clean Architecture
+- TDD
+- Bloc
+- Functional Programming
 
 ## Reference
 - [Flutter TDD Clean Architecture Course [1] – Explanation & Project Structure](https://www.youtube.com/watch?v=KjE2IDphA_U)
