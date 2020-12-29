@@ -8,5 +8,8 @@ class NumberTrivia extends Equatable {
   NumberTrivia({
     @required this.text,
     @required this.number,
-  }) : super([text, number]); // super => Equatable에서 비교할 property 전달
+  });
+
+  @override
+  List<Object> get props => [text, number];
 }
