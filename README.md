@@ -43,7 +43,7 @@ lib
   - 통합 테스트(integration testing)
 
 - use packages
-  - [flutter_text](https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html)
+  - [flutter_test](https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html)
   - [mockito](https://pub.dev/packages/mockito)
 ```dart
 group : 특정 상태를 그룹으로 생성. 하위 그룹을 가질 수 있음
@@ -55,18 +55,6 @@ verifyZeroInteractions : 기능이 호출 안되었는지 확인
 
 ## API
 - [number trivia API](http://numbersapi.com/)
-  - http://numbersapi.com/random/trivia?json
-  - http://numbersapi.com/{number}
-  - edge case
-    - `1e+21` 형태로 number 응답하는 경우
-    ```
-    {
-      text: "1e+21 is the number of grains of sand on all the world's beaches put together.",
-      number: 1e+21,
-      found: true,
-      type: "trivia"
-    }
-    ```
 
 ## Reference
 - Flutter TDD Clean Architecture Course
