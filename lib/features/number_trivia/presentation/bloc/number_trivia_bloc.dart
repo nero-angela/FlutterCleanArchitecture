@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:clean_architecture_tdd/core/error/failures.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -30,7 +31,11 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
         assert(random != null),
         assert(inputConverter != null),
         getConcreteNumberTrivia = concrete,
-        getRandomNumberTrivia = random;
+        getRandomNumberTrivia = random,
+        super(null);
+
+  @override
+  NumberTriviaState get initialState => Empty();
 
   @override
   Stream<NumberTriviaState> mapEventToState(
@@ -44,11 +49,28 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
         (failure) async* {
           yield Error(message: INVALID_INPUT_FAILURE_MESSAGE);
         },
-        (integer) => throw UnimplementedError(),
+        (integer) async* {
+          yield Loading();
+          final failureOrTrivia =
+              await getConcreteNumberTrivia(Params(number: integer));
+          yield failureOrTrivia.fold(
+            (failure) =>
+                Error(message: _mapFailureToMessage(failure as Failure)),
+            (trivia) => Loaded(trivia: trivia),
+          );
+        },
       );
     }
   }
 
-  @override
-  NumberTriviaState get initialState => Empty();
+  String _mapFailureToMessage(Failure failure) {
+    switch (failure.runtimeType) {
+      case ServerFailure:
+        return SERVER_FAILURE_MESSAGE;
+      case CacheFailure:
+        return CACHE_FAILURE_MESSAGE;
+      default:
+        return 'Unexpected Error';
+    }
+  }
 }
