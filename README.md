@@ -18,23 +18,11 @@ lib
       domain
         entities
         repositories : data / repositories에 대한 abstract
-        usecases
+        usecases : 해당 도메인에 대한 기능
       presentation
         block
         pages
         widgets
-
-test
-  core
-
-  features
-    feature
-      data
-        models
-      domain
-        usecases
-      presentation
-  fixtures : API 응답 json data 예제로 unit test시 사용
 ```
 
 ## Clean Architecture
